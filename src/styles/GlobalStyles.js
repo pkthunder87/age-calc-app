@@ -1,1 +1,43 @@
 import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+:root {
+    /* Primary Colors */
+    --color-purple: hsl(259, 100%, 65%);
+    --color-light-red: hsl(0, 100%, 67%);
+
+    /* Neutral Colors */
+    --color-white: hsl(0, 0%, 100%);
+    --color-off-white: hsl(0, 0%, 94%);
+    --color-light-grey: hsl(0, 0%, 86%);
+    --color-smokey-grey: hsl(0, 1%, ;44%)
+    --color-off-black: hsl(0, 0%, 8%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+    height: 100dvh;
+    width: 100dvw;
+    background-color: var(--color-light-grey);
+    font-family: 'Poppins', sans-serif;
+}
+`;
+
+export default GlobalStyles;
