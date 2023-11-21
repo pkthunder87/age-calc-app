@@ -38,7 +38,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-light-grey);
+    background-color: var(--color-off-white);
     font-family: 'Poppins', sans-serif;
 }
 `;
