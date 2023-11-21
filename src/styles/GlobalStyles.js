@@ -35,6 +35,9 @@ html {
 body {
     height: 100dvh;
     width: 100dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-light-grey);
     font-family: 'Poppins', sans-serif;
 }

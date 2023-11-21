@@ -1,19 +1,23 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
+
+const test = css`
+  text-align: center;
+`;
 
 const StyledApp = styled.main`
   background-color: var(--color-purple);
   padding: 2rem;
+  height: 65.5rem;
+  width: 84.5rem;
   font-style: italic;
+  border-radius: 24px 24px 200px 24px;
 `;
 
 const H1 = styled.h1`
   font-size: 4rem;
   font-weight: 700;
-`;
-
-const Inputs = styled.input`
-  font-size: 3.2rem;
+  ${test}
 `;
 
 function App() {
