@@ -1,5 +1,5 @@
 function BirthdayForm() {
-  return <div>Enter date of birth:</div>;
+  return <div>Day Month Year</div>;
 }
 
 export default BirthdayForm;
