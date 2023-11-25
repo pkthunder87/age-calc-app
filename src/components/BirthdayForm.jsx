@@ -2,10 +2,19 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
 function BirthdayForm() {
-  const StyledBirthdayForm = styled.div`
+  const StyledBirthdayForm = styled.form`
+    display: flex;
+
+    background-color: red;
     @media only screen and (max-width: 25em) {
       background-color: lightblue;
     }
+  `;
+
+  const StyledInput = styled.div`
+    display: flex;
+
+    background-color: green;
   `;
 
   function onSubmit(data) {
@@ -18,15 +27,24 @@ function BirthdayForm() {
     formState: { errors },
   } = useForm();
 
+  const StyledButton = styled.button`
+    height: 4rem;
+    width: 8rem;
+  `;
+
+  const BirthdayLayout = styled.div`
+    display: flex;
+  `;
+
   return (
-    <StyledBirthdayForm>
-      <form id="inputDay" onSubmit={handleSubmit(onSubmit)}>
-        <div>
+    <div>
+      <StyledBirthdayForm id="inputDay" onSubmit={handleSubmit(onSubmit)}>
+        <StyledInput>
           <label htmlFor="day">Day</label>
           <input type="number" id="day" placeholder="DD" {...register("day")} />
-        </div>
+        </StyledInput>
 
-        <div>
+        <StyledInput>
           <label htmlFor="month">Month</label>
           <input
             type="number"
@@ -34,9 +52,9 @@ function BirthdayForm() {
             placeholder="DD"
             {...register("month")}
           />
-        </div>
+        </StyledInput>
 
-        <div>
+        <StyledInput>
           <label htmlFor="year">Year</label>
           <input
             type="number"
@@ -44,13 +62,13 @@ function BirthdayForm() {
             placeholder="DD"
             {...register("year")}
           />
-        </div>
-      </form>
+        </StyledInput>
+      </StyledBirthdayForm>
 
-      <button type="submit" form="inputDay" value="Submit">
+      <StyledButton type="submit" form="inputDay" value="Submit">
         Submit
-      </button>
-    </StyledBirthdayForm>
+      </StyledButton>
+    </div>
   );
 }
 
