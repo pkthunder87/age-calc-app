@@ -5,7 +5,7 @@ function BirthdayForm() {
   const StyledBirthdayForm = styled.form`
     display: flex;
 
-    background-color: red;
+    background-color: white;
     @media only screen and (max-width: 25em) {
       background-color: lightblue;
     }
@@ -21,20 +21,16 @@ function BirthdayForm() {
     console.log(data.day, data.month, data.year);
   }
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const StyledButton = styled.button`
     height: 4rem;
     width: 8rem;
   `;
 
-  const BirthdayLayout = styled.div`
-    display: flex;
-  `;
+  // const BirthdayLayout = styled.div`
+  //   display: flex;
+  // `;
 
   return (
     <div>
