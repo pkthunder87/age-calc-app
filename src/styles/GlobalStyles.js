@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
     --color-white: hsl(0, 0%, 100%);
     --color-off-white: hsl(0, 0%, 94%);
     --color-light-grey: hsl(0, 0%, 86%);
-    --color-smokey-grey: hsl(0, 1%, ;44%)
+    --color-smokey-grey: hsl(0, 1%, 44%);
     --color-off-black: hsl(0, 0%, 8%);
 }
 

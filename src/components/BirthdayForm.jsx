@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 function BirthdayForm() {
   const StyledBirthdayForm = styled.form`
     display: flex;
+    height: 50%;
+    width: 80%;
+    column-gap: 2rem;
+    margin-top: 4rem;
+    margin-left: 3.6rem;
 
     background-color: white;
     @media only screen and (max-width: 25em) {
@@ -13,8 +18,22 @@ function BirthdayForm() {
 
   const StyledInput = styled.div`
     display: flex;
+    flex-direction: column;
 
-    background-color: green;
+    label {
+      margin-top: -0.2rem;
+      font-size: 1.3rem;
+      font-style: normal;
+      letter-spacing: 0.33em;
+      font-weight: 700;
+      color: var(--color-smokey-grey);
+      text-transform: uppercase;
+    }
+
+    input {
+      height: 3rem;
+      width: 6rem;
+    }
   `;
 
   function onSubmit(data) {
@@ -28,12 +47,12 @@ function BirthdayForm() {
     width: 8rem;
   `;
 
-  // const BirthdayLayout = styled.div`
-  //   display: flex;
-  // `;
+  const BirthdayLayout = styled.div`
+    background-color: red;
+  `;
 
   return (
-    <div>
+    <BirthdayLayout>
       <StyledBirthdayForm id="inputDay" onSubmit={handleSubmit(onSubmit)}>
         <StyledInput>
           <label htmlFor="day">Day</label>
@@ -64,7 +83,7 @@ function BirthdayForm() {
       <StyledButton type="submit" form="inputDay" value="Submit">
         Submit
       </StyledButton>
-    </div>
+    </BirthdayLayout>
   );
 }
 
