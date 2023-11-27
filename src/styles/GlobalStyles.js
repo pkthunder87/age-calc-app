@@ -40,6 +40,10 @@ body {
     justify-content: center;
     background-color: var(--color-off-white);
     font-family: 'Poppins', sans-serif;
+    font-kerning: normal;
+    font-smooth: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 `;
 

@@ -6,7 +6,7 @@ function BirthdayForm() {
     display: flex;
     height: 50%;
     width: 80%;
-    column-gap: 2rem;
+    column-gap: 3.2rem;
     margin-top: 4rem;
     margin-left: 3.6rem;
 
@@ -19,20 +19,30 @@ function BirthdayForm() {
   const StyledInput = styled.div`
     display: flex;
     flex-direction: column;
+    font-style: normal;
+    color: var(--color-smokey-grey);
 
     label {
       margin-top: -0.2rem;
       font-size: 1.3rem;
-      font-style: normal;
       letter-spacing: 0.33em;
       font-weight: 700;
-      color: var(--color-smokey-grey);
       text-transform: uppercase;
     }
 
     input {
-      height: 3rem;
-      width: 6rem;
+      margin-top: 0.8rem;
+      height: 7.2rem;
+      width: 16rem;
+      border-radius: 8px;
+      border: 1.2px solid var(--color-light-grey);
+      padding-left: 2.3rem;
+
+      &::placeholder {
+        font-weight: 800;
+        font-size: 3.2rem;
+        color: hsl(0, 1%, 14%);
+      }
     }
   `;
 
@@ -48,7 +58,7 @@ function BirthdayForm() {
   `;
 
   const BirthdayLayout = styled.div`
-    background-color: red;
+    /* background-color: red; */
   `;
 
   return (
@@ -56,15 +66,15 @@ function BirthdayForm() {
       <StyledBirthdayForm id="inputDay" onSubmit={handleSubmit(onSubmit)}>
         <StyledInput>
           <label htmlFor="day">Day</label>
-          <input type="number" id="day" placeholder="DD" {...register("day")} />
+          <input type="text" id="day" placeholder="DD" {...register("day")} />
         </StyledInput>
 
         <StyledInput>
           <label htmlFor="month">Month</label>
           <input
-            type="number"
+            type="text"
             id="month"
-            placeholder="DD"
+            placeholder="MM"
             {...register("month")}
           />
         </StyledInput>
@@ -72,9 +82,9 @@ function BirthdayForm() {
         <StyledInput>
           <label htmlFor="year">Year</label>
           <input
-            type="number"
+            type="text"
             id="year"
-            placeholder="DD"
+            placeholder="YYYY"
             {...register("year")}
           />
         </StyledInput>
