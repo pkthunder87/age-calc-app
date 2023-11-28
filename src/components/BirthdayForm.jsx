@@ -50,11 +50,18 @@ function BirthdayForm() {
       border-radius: 8px;
       border: 1.2px solid var(--color-light-grey);
       padding-left: 2.3rem;
-      padding-top: 1.5rem;
+
+      font-weight: 800;
+      font-size: 3.2rem;
+
+      cursor: pointer;
+      caret-color: var(--color-purple);
 
       &::placeholder {
-        font-weight: 800;
-        font-size: 3.2rem;
+      }
+
+      &:focus-visible {
+        outline: 1px solid var(--color-purple);
       }
     }
   `;
@@ -76,6 +83,10 @@ function BirthdayForm() {
     right: 3.6rem;
     bottom: 1.2rem;
     z-index: 2;
+
+    &:hover {
+      background-color: var(--color-off-black);
+    }
   `;
 
   const BirthdayLayout = styled.div`
