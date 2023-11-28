@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function CalculatedAge() {
+function CalculatedAge({ ageDays, ageMonths, ageYears }) {
   const StyledCalculatedAge = styled.div`
     display: flex;
     flex-direction: column;
@@ -26,13 +26,13 @@ function CalculatedAge() {
   return (
     <StyledCalculatedAge>
       <Date>
-        <Age>- -</Age>years
+        <Age>{ageDays ? ageDays : "- -"}</Age>years
       </Date>
       <Date>
-        <Age>- -</Age>months
+        <Age>{ageMonths ? ageMonths : "- -"}</Age>months
       </Date>
       <Date>
-        <Age>- -</Age>days
+        <Age>{ageYears ? ageYears : "- -"}</Age>days
       </Date>
     </StyledCalculatedAge>
   );

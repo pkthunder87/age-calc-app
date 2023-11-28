@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-function BirthdayForm() {
+function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
   function onSubmit(data) {
     console.log(data.day, data.month, data.year);
+    setAgeDays(data.day);
+    setAgeMonths(data.month);
+    setAgeYears(data.year);
   }
 
   const { register, handleSubmit } = useForm();

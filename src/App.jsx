@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
 import CalculatedAge from "./components/CalculatedAge";
 import BirthdayForm from "./components/BirthdayForm";
+import { useState } from "react";
 
 const StyledApp = styled.main`
   background-color: var(--color-white);
@@ -14,19 +15,28 @@ const StyledApp = styled.main`
   grid-template-rows: 40% 60%;
 `;
 
-// const H1 = styled.h1`
-//   font-size: 4rem;
-//   font-weight: 700;
-//   ${test}
-// `;
-
 function App() {
+  const [ageDays, setAgeDays] = useState("");
+
+  const [ageMonths, setAgeMonths] = useState("");
+
+  const [ageYears, setAgeYears] = useState("");
+
   return (
     <>
       <GlobalStyles />
       <StyledApp>
-        <BirthdayForm />
-        <CalculatedAge />
+        <BirthdayForm
+          setAgeDays={setAgeDays}
+          setAgeMonths={setAgeMonths}
+          setAgeYears={setAgeYears}
+        />
+
+        <CalculatedAge
+          ageDays={ageDays}
+          ageMonths={ageMonths}
+          ageYears={ageYears}
+        />
       </StyledApp>
     </>
   );
