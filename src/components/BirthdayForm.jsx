@@ -1,15 +1,37 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { addDays, isLeapYear, format } from "date-fns";
+
+const daysInMonth = [0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
   function onSubmit(data) {
     console.log(data.day, data.month, data.year);
-    setAgeDays(data.day);
-    setAgeMonths(data.month);
-    setAgeYears(data.year);
+    console.log(errors);
+    setAgeDays(+data.day);
+    setAgeMonths(+data.month);
+    setAgeYears(+data.year);
   }
 
-  const { register, handleSubmit } = useForm();
+  function onError(errors) {
+    console.log(errors);
+  }
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  // const date = new Date(2020, 2);
+  // console.log(date);
+  // // const year = format(date, "MM/dd/yyyy");
+  // const isLeap = isLeapYear(date);
+
+  // // console.log(year);
+  // console.log(isLeap);
 
   const StyledBirthdayForm = styled.form`
     display: flex;
@@ -106,10 +128,39 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
 
   return (
     <BirthdayLayout>
-      <StyledBirthdayForm id="inputDay" onSubmit={handleSubmit(onSubmit)}>
+      <StyledBirthdayForm
+        id="inputDay"
+        onSubmit={handleSubmit(onSubmit, onError)}
+      >
         <StyledInput>
           <label htmlFor="day">Day</label>
-          <input type="text" id="day" placeholder="DD" {...register("day")} />
+          <input
+            type="text"
+            id="day"
+            placeholder="DD"
+            {...register("day", {
+              required: "This field is required",
+              min: {
+                value: 1,
+                message: "Must be a valid day",
+              },
+              validate: (value) => {
+                const isLeap = new Date(getValues().year, 2);
+
+                // Checks if input month is a leap year
+                if (+getValues().month === 2)
+                  return (
+                    value <= (isLeapYear(isLeap) ? 29 : 28) ||
+                    "Must be a valid day"
+                  );
+                else
+                  return (
+                    value <= daysInMonth[+getValues().month] ||
+                    "Must be a valid day"
+                  );
+              },
+            })}
+          />
         </StyledInput>
 
         <StyledInput>
@@ -118,7 +169,17 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
             type="text"
             id="month"
             placeholder="MM"
-            {...register("month")}
+            {...register("month", {
+              required: "This field is required",
+              min: {
+                value: 1,
+                message: "Must be a valid month",
+              },
+              max: {
+                value: 12,
+                message: "Must be a valid month",
+              },
+            })}
           />
         </StyledInput>
 
