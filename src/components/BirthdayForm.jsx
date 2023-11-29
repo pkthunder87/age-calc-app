@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { isLeapYear, format } from "date-fns";
+import { useState } from "react";
 
 const daysInMonth = [0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -61,6 +62,46 @@ const StyledInput = styled.div`
   }
 `;
 
+const StyledInputErrors = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  font-style: normal;
+  color: var(--color-light-red);
+
+  label {
+    margin-top: -0.2rem;
+
+    font-size: 1.3rem;
+    letter-spacing: 0.33em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  input {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+
+    height: 7.2rem;
+    width: 16rem;
+
+    border-radius: 8px;
+    border: 1.2px solid var(--color-light-grey);
+    padding-left: 2.3rem;
+
+    font-weight: 800;
+    font-size: 3.2rem;
+
+    cursor: pointer;
+    caret-color: var(--color-light-red);
+
+    &::placeholder {
+    }
+
+    outline: 1px solid var(--color-light-red);
+  }
+`;
+
 const StyledButton = styled.button`
   display: flex;
   justify-content: center;
@@ -107,30 +148,120 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
   function onSubmit(data) {
     console.log(data.day, data.month, data.year);
     console.log(errors);
+
+    setDayHasErrors(false);
+    setMonthHasErrors(false);
+    setYearHasErrors(false);
+
     setAgeDays(+data.day);
     setAgeMonths(+data.month);
     setAgeYears(+data.year);
   }
 
+  const [dayHasErrors, setDayHasErrors] = useState(false);
+  const [monthHasErrors, setMonthHasErrors] = useState(false);
+  const [yearHasErrors, setYearHasErrors] = useState(false);
+
   function onError(errors) {
     console.log(errors);
+    if (errors.day) setDayHasErrors(true);
+    else setDayHasErrors(false);
+    if (errors.month) setMonthHasErrors(true);
+    else setMonthHasErrors(false);
+    if (errors.year) setYearHasErrors(true);
+    else setYearHasErrors(false);
   }
 
   const {
     register,
     handleSubmit,
-    reset,
     getValues,
     formState: { errors },
   } = useForm();
 
-  // const date = new Date(2020, 2);
-  // console.log(date);
-  // // const year = format(date, "MM/dd/yyyy");
-  // const isLeap = isLeapYear(date);
+  const dayInputForm = (
+    <>
+      <label htmlFor="day">Day</label>
+      <input
+        type="text"
+        id="day"
+        placeholder="DD"
+        {...register("day", {
+          required: "This field is required",
+          min: {
+            value: 1,
+            message: "Must be a valid day",
+          },
+          validate: (value) => {
+            const isLeap = new Date(getValues().year, 2);
 
-  // // console.log(year);
-  // console.log(isLeap);
+            // Checks if input month is a leap year
+            if (+getValues().month === 2)
+              return (
+                value <= (isLeapYear(isLeap) ? 29 : 28) || "Must be a valid day"
+              );
+            else
+              return (
+                value <= daysInMonth[+getValues().month] ||
+                "Must be a valid day"
+              );
+          },
+        })}
+      />
+      {errors.day?.message && <InvalidText>{errors.day.message}</InvalidText>}
+    </>
+  );
+
+  const monthInputForm = (
+    <>
+      <label htmlFor="month">Month</label>
+      <input
+        type="text"
+        id="month"
+        placeholder="MM"
+        {...register("month", {
+          required: "This field is required",
+          min: {
+            value: 1,
+            message: "Must be a valid month",
+          },
+          max: {
+            value: 12,
+            message: "Must be a valid month",
+          },
+        })}
+      />
+      {errors.month?.message && (
+        <InvalidText>{errors.month.message}</InvalidText>
+      )}
+    </>
+  );
+
+  const yearInputForm = (
+    <>
+      {" "}
+      <label htmlFor="year">Year</label>
+      <input
+        type="text"
+        id="year"
+        placeholder="YYYY"
+        {...register("year", {
+          required: "This field is required",
+          min: {
+            value: 1900,
+            message: "Must be a valid year",
+          },
+          validate: (value) => {
+            const currentDate = new Date();
+            const currentYear = format(currentDate, "yyyy");
+
+            return value <= +currentYear || "Must be in the past";
+          },
+        })}
+      />
+      {errors.year?.message && <InvalidText>{errors.year.message}</InvalidText>}
+    </>
+  );
 
   return (
     <BirthdayLayout>
@@ -138,87 +269,23 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
         id="inputDay"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <StyledInput>
-          <label htmlFor="day">Day</label>
-          <input
-            type="text"
-            id="day"
-            placeholder="DD"
-            {...register("day", {
-              required: "This field is required",
-              min: {
-                value: 1,
-                message: "Must be a valid day",
-              },
-              validate: (value) => {
-                const isLeap = new Date(getValues().year, 2);
+        {dayHasErrors ? (
+          <StyledInputErrors>{dayInputForm}</StyledInputErrors>
+        ) : (
+          <StyledInput>{dayInputForm}</StyledInput>
+        )}
 
-                // Checks if input month is a leap year
-                if (+getValues().month === 2)
-                  return (
-                    value <= (isLeapYear(isLeap) ? 29 : 28) ||
-                    "Must be a valid day"
-                  );
-                else
-                  return (
-                    value <= daysInMonth[+getValues().month] ||
-                    "Must be a valid day"
-                  );
-              },
-            })}
-          />
-          {errors.day?.message && (
-            <InvalidText>{errors.day.message}</InvalidText>
-          )}
-        </StyledInput>
+        {monthHasErrors ? (
+          <StyledInputErrors>{monthInputForm}</StyledInputErrors>
+        ) : (
+          <StyledInput>{monthInputForm}</StyledInput>
+        )}
 
-        <StyledInput>
-          <label htmlFor="month">Month</label>
-          <input
-            type="text"
-            id="month"
-            placeholder="MM"
-            {...register("month", {
-              required: "This field is required",
-              min: {
-                value: 1,
-                message: "Must be a valid month",
-              },
-              max: {
-                value: 12,
-                message: "Must be a valid month",
-              },
-            })}
-          />
-          {errors.month?.message && (
-            <InvalidText>{errors.month.message}</InvalidText>
-          )}
-        </StyledInput>
-
-        <StyledInput>
-          <label htmlFor="year">Year</label>
-          <input
-            type="text"
-            id="year"
-            placeholder="YYYY"
-            {...register("year", {
-              required: "This field is required",
-              min: {
-                value: 1900,
-                message: "Must be a valid year",
-              },
-              validate: (value) => {
-                const currentDate = new Date();
-                const currentYear = format(currentDate, "yyyy");
-
-                return value <= +currentYear || "Must be in the past";
-              },
-            })}
-          />
-          {errors.year?.message && (
-            <InvalidText>{errors.year.message}</InvalidText>
-          )}
-        </StyledInput>
+        {yearHasErrors ? (
+          <StyledInputErrors>{yearInputForm}</StyledInputErrors>
+        ) : (
+          <StyledInput>{yearInputForm}</StyledInput>
+        )}
       </StyledBirthdayForm>
 
       <SolidLine></SolidLine>
