@@ -160,13 +160,23 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
     setYearHasErrors(false);
 
     const currentDate = new Date();
-    console.log(currentDate);
-    const birthdayInput = new Date(+data.year, +data.month - 1, +data.day);
-    console.log(birthdayInput);
+    const userBirthday = new Date(+data.year, +data.month - 1, +data.day);
+    const daysDifference = +differenceInDays(currentDate, userBirthday);
 
-    setAgeDays(+data.day);
-    setAgeMonths(+data.month);
-    setAgeYears(+data.year);
+    const userAgeInYears = Math.floor(daysDifference / 365);
+
+    // Subtract leap year days
+    const userAgeInMonths = Math.floor(
+      ((daysDifference % 365) - Math.floor(userAgeInYears / 4)) / 30.42
+    );
+
+    const userAgeInDays = Math.floor(
+      ((daysDifference % 365) - Math.floor(userAgeInYears / 4)) % 30.42
+    );
+
+    setAgeYears(userAgeInYears);
+    setAgeMonths(userAgeInMonths);
+    setAgeDays(userAgeInDays);
   }
 
   const [dayHasErrors, setDayHasErrors] = useState(false);

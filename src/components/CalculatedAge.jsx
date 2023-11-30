@@ -26,13 +26,15 @@ function CalculatedAge({ ageDays, ageMonths, ageYears }) {
   return (
     <StyledCalculatedAge>
       <Date>
-        <Age>{ageYears ? ageYears : "- -"}</Age>years
+        <Age>{ageYears === 0 ? ageYears : ageYears ? ageYears : "- -"}</Age>
+        years
       </Date>
       <Date>
-        <Age>{ageMonths ? ageMonths : "- -"}</Age>months
+        <Age>{ageMonths === 0 ? ageMonths : ageMonths ? ageMonths : "- -"}</Age>
+        months
       </Date>
       <Date>
-        <Age>{ageDays ? ageDays : "- -"}</Age>days
+        <Age>{ageDays === 0 ? ageDays : ageDays ? ageDays : "- -"}</Age>days
       </Date>
     </StyledCalculatedAge>
   );
