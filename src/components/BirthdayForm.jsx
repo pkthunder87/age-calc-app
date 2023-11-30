@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { isLeapYear, format } from "date-fns";
+import { differenceInDays, format, isLeapYear } from "date-fns";
 import { useState } from "react";
 
+////////////////////////////////
+// Variables
 const daysInMonth = [0, 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+//////////////////////////////
+// Styled components
 const StyledBirthdayForm = styled.form`
   display: flex;
   column-gap: 3.2rem;
@@ -144,6 +148,8 @@ const InvalidText = styled.p`
   font-size: 1.3rem;
 `;
 
+/////////////////////////////
+// React Component
 function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
   function onSubmit(data) {
     console.log(data.day, data.month, data.year);
@@ -152,6 +158,11 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
     setDayHasErrors(false);
     setMonthHasErrors(false);
     setYearHasErrors(false);
+
+    const currentDate = new Date();
+    console.log(currentDate);
+    const birthdayInput = new Date(+data.year, +data.month - 1, +data.day);
+    console.log(birthdayInput);
 
     setAgeDays(+data.day);
     setAgeMonths(+data.month);
@@ -179,6 +190,8 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
     formState: { errors },
   } = useForm();
 
+  //////////////////////////
+  // Error dependent JSX
   const dayInputForm = (
     <>
       <label htmlFor="day">Day</label>
@@ -263,6 +276,8 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
     </>
   );
 
+  //////////////////////////////
+  // What is visually rendered
   return (
     <BirthdayLayout>
       <StyledBirthdayForm
