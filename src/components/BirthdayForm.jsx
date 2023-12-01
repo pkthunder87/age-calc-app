@@ -21,9 +21,11 @@ const StyledBirthdayForm = styled.form`
 
   background-color: white;
 
-  /* @media only screen and (max-width: 25em) {
-    background-color: lightblue;
-  } */
+  @media only screen and (max-width: 25em) {
+    width: 90%;
+    margin-left: 3.2rem;
+    justify-content: center;
+  }
 `;
 
 const StyledInput = styled.div`
@@ -40,6 +42,12 @@ const StyledInput = styled.div`
     letter-spacing: 0.33em;
     font-weight: 700;
     text-transform: uppercase;
+
+    @media only screen and (max-width: 25em) {
+      margin-top: 2.5rem;
+      font-size: 2.2rem;
+      letter-spacing: 0.2em;
+    }
   }
 
   input {
@@ -64,6 +72,11 @@ const StyledInput = styled.div`
     &:focus-visible {
       outline: 1px solid var(--color-purple);
     }
+
+    @media only screen and (max-width: 25em) {
+      height: 9.2rem;
+      width: 16rem;
+    }
   }
 `;
 
@@ -81,6 +94,12 @@ const StyledInputErrors = styled.div`
     letter-spacing: 0.33em;
     font-weight: 700;
     text-transform: uppercase;
+
+    @media only screen and (max-width: 25em) {
+      margin-top: 2.5rem;
+      font-size: 2.2rem;
+      letter-spacing: 0.2em;
+    }
   }
 
   input {
@@ -104,6 +123,11 @@ const StyledInputErrors = styled.div`
     }
 
     outline: 1px solid var(--color-light-red);
+
+    @media only screen and (max-width: 25em) {
+      height: 9.2rem;
+      width: 16rem;
+    }
   }
 `;
 
@@ -130,7 +154,18 @@ const StyledButton = styled.button`
   }
 
   @media only screen and (max-width: 25em) {
-    background-color: lightblue;
+    height: 11.5rem;
+    width: 11.5rem;
+
+    right: 41%;
+    bottom: 5.5rem;
+
+    svg {
+      transform: scale(0.5);
+      g {
+        stroke-width: 4;
+      }
+    }
   }
 `;
 
@@ -144,6 +179,11 @@ const SolidLine = styled.div`
   width: 80%;
 
   border: 1px solid var(--color-off-white);
+
+  @media only screen and (max-width: 25em) {
+    margin-top: 6rem;
+    width: 88%;
+  }
 `;
 
 const InvalidText = styled.p`
@@ -151,6 +191,11 @@ const InvalidText = styled.p`
   font-weight: 400;
   font-style: italic;
   font-size: 1.3rem;
+
+  @media only screen and (max-width: 25em) {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 /////////////////////////////
@@ -320,11 +365,16 @@ function BirthdayForm({ setAgeDays, setAgeMonths, setAgeYears }) {
 
       <SolidLine></SolidLine>
       <StyledButton type="submit" form="inputDay" value="Submit">
-        <img
-          className=" "
-          src="./icon-arrow.svg"
-          alt="arrow pointing downwards"
-        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="46"
+          height="44"
+          viewBox="0 0 46 44"
+        >
+          <g fill="none" stroke="#FFF" strokeWidth="2">
+            <path d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44" />
+          </g>
+        </svg>
       </StyledButton>
     </BirthdayLayout>
   );

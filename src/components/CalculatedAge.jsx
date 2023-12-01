@@ -6,6 +6,10 @@ function CalculatedAge({ ageDays, ageMonths, ageYears }) {
     flex-direction: column;
     padding-left: 3.6rem;
     letter-spacing: -1px;
+
+    @media only screen and (max-width: 25em) {
+      margin-top: 1.8rem;
+    }
   `;
 
   const Date = styled.h2`

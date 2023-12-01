@@ -15,9 +15,11 @@ const StyledApp = styled.main`
   grid-template-rows: 40% 60%;
 
   @media only screen and (max-width: 25em) {
-    height: 116rem;
-    width: 82rem;
+    height: 86rem;
+    width: 64rem;
     border-radius: 24px 24px 110px 24px;
+    grid-template-rows: 50% 50%;
+    padding: 1rem;
   }
 `;
 
