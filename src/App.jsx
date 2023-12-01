@@ -13,6 +13,12 @@ const StyledApp = styled.main`
   border-radius: 24px 24px 200px 24px;
   display: grid;
   grid-template-rows: 40% 60%;
+
+  @media only screen and (max-width: 25em) {
+    height: 116rem;
+    width: 82rem;
+    border-radius: 24px 24px 110px 24px;
+  }
 `;
 
 function App() {

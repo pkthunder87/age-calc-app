@@ -20,9 +20,10 @@ const StyledBirthdayForm = styled.form`
   margin-left: 3.6rem;
 
   background-color: white;
-  @media only screen and (max-width: 25em) {
+
+  /* @media only screen and (max-width: 25em) {
     background-color: lightblue;
-  }
+  } */
 `;
 
 const StyledInput = styled.div`
@@ -126,6 +127,10 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: var(--color-off-black);
+  }
+
+  @media only screen and (max-width: 25em) {
+    background-color: lightblue;
   }
 `;
 

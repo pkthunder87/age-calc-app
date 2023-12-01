@@ -30,6 +30,10 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 62.5%;
+
+     @media only screen and (max-width: 25em) {
+    font-size: 26%;
+  }
 }
 
 body {
