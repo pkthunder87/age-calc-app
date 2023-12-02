@@ -1,4 +1,16 @@
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
+
+// From Basir - https://youtu.be/SsDtEq50xiQ
+function AnimatedNumber({ n }) {
+  const { number } = useSpring({
+    from: { number: 0 },
+    number: n,
+    delay: 200,
+    config: { mass: 1, tension: 20, friction: 10 },
+  });
+  return <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>;
+}
 
 function CalculatedAge({ ageDays, ageMonths, ageYears }) {
   const StyledCalculatedAge = styled.div`
@@ -29,16 +41,42 @@ function CalculatedAge({ ageDays, ageMonths, ageYears }) {
 
   return (
     <StyledCalculatedAge>
+      <h1></h1>
       <Date>
-        <Age>{ageYears === 0 ? ageYears : ageYears ? ageYears : "- -"}</Age>
+        <Age>
+          {ageYears === 0 ? (
+            ageYears
+          ) : ageYears ? (
+            <AnimatedNumber n={ageYears} />
+          ) : (
+            "- -"
+          )}
+        </Age>
         years
       </Date>
       <Date>
-        <Age>{ageMonths === 0 ? ageMonths : ageMonths ? ageMonths : "- -"}</Age>
+        <Age>
+          {ageMonths === 0 ? (
+            ageMonths
+          ) : ageMonths ? (
+            <AnimatedNumber n={ageMonths} />
+          ) : (
+            "- -"
+          )}
+        </Age>
         months
       </Date>
       <Date>
-        <Age>{ageDays === 0 ? ageDays : ageDays ? ageDays : "- -"}</Age>days
+        <Age>
+          {ageDays === 0 ? (
+            ageDays
+          ) : ageDays ? (
+            <AnimatedNumber n={ageDays} />
+          ) : (
+            "- -"
+          )}
+        </Age>
+        days
       </Date>
     </StyledCalculatedAge>
   );
