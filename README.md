@@ -11,7 +11,7 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
 
 ### Links
 
-- Live Site URL: [Netlify](Replace.with.actual.URL)
+- Live Site URL: [Netlify](https://pkthunder-age-calc.netlify.app/)
 
 ### Built with
 
@@ -19,6 +19,7 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
 - React
 - Styled Components
 - react-hook-form
+- react-spring
 - date-fns
 
 ## Author
