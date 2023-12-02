@@ -3,6 +3,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import CalculatedAge from "./components/CalculatedAge";
 import BirthdayForm from "./components/BirthdayForm";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 const StyledApp = styled.main`
   background-color: var(--color-white);
@@ -13,6 +14,7 @@ const StyledApp = styled.main`
   border-radius: 24px 24px 200px 24px;
   display: grid;
   grid-template-rows: 40% 60%;
+  position: relative;
 
   @media only screen and (max-width: 25em) {
     height: 86rem;
@@ -45,6 +47,7 @@ function App() {
           ageMonths={ageMonths}
           ageYears={ageYears}
         />
+        <Footer />
       </StyledApp>
     </>
   );
