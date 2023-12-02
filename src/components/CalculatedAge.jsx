@@ -41,7 +41,6 @@ function CalculatedAge({ ageDays, ageMonths, ageYears }) {
 
   return (
     <StyledCalculatedAge>
-      <h1></h1>
       <Date>
         <Age>
           {ageYears === 0 ? (
